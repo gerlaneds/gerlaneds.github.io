@@ -1,1 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Pré-Matrícula - Escola Virtual</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        fieldset { margin-bottom: 20px; }
+        label { display: block; margin-top: 8px; }
+        .grupo-inline { display: flex; gap: 10px; align-items: center; }
+        .erro { color: red; font-weight: bold; }
+        .sucesso { color: green; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Escola Virtual</h1>
+    <h2>Formulário de Pré-Matrícula</h2>
 
+    <form id="formMatricula">
+        <fieldset>
+            <legend>Dados Pessoais</legend>
+
+            <label>Nome do Aluno:
+                <input type="text" id="nomeAluno">
+            </label>
+
+            <label>Nascimento (dd/mm/aaaa):</label>
+            <div class="grupo-inline">
+                <input type="text" id="dia" size="2">
+                <input type="text" id="mes" size="2">
+                <input type="text" id="ano" size="4">
+            </div>
+
+            <label>Nome da Mãe:
+                <input type="text" id="nome
