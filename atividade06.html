@@ -1,1 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Controle de Gastos</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        table { width: 400px; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid #333; }
+        th, td { padding: 8px; text-align: center; }
+        .box { border: 1px solid #555; padding: 20px; width: 450px; }
+    </style>
+</head>
+<body>
 
+<h2>Inserir Gastos</h2>
+
+<div class="box">
+    <label>Categoria:</label>
+    <select id="categoria">
+        <option>Mercado</option>
+        <option>Transporte</option>
+        <option>Outros</option>
+    </select><br><br>
+
+    <label>Valor:</label>
+    <input type="number" id="valor" step="0.01"><br><br>
+
+    <label>Data:</label>
+    <input type="date" id="data"><br><br>
+
+    <button onclick="adicionar()">Adicionar</button>
+    <button onclick="calcular()">Calcular</button>
+
+    <table id="tabela">
+        <tr>
+            <th>Categoria</th>
+            <th>Data</th>
+            <th>Valor</th>
+        </tr>
+    </table>
+</div>
+
+<script>
+    function adicionar() {
+        let cat = document.getElementById("categoria").value;
+        let val = parseFloat(document.getElementById("valor").value);
+        let data = document.getElementById("data").value;
+
+        if (!val || !data) {
+            alert("Preencha todos os campos!");
+            return;
+        }
+
+        let tabela = document.getElementById("tabela");
+        let linha = tabela.insertRow(-1);
+
+        linha.insertCell(0).innerHTML = cat;
+        linha.insertCell(1).innerHTML = data;
+        linha.insertCell(2).innerHTML = val.toFixed(2);
+
+        salvarLocalStorage();
+    }
+
+    function salvarLocalStorage() {
+        let linhas = document.querySelectorAll("#tabela tr");
+        let dados = [];
+
+        linhas.forEach((linha, index) => {
+            if (index === 0) return; // pular cabeçalho
+            let col = linha.querySelectorAll("td");
+            dados.push({
+                categoria: col[0].innerText,
+                data: col[1].innerText,
+                valor: col[2].innerText
+            });
+        });
+
+        localStorage.setItem("gastos", JSON.stringify(dados));
+    }
+
+    function calcular() {
+        window.location.href = "resumo.html";
+    }
+</script>
+
+</body>
+</html>
